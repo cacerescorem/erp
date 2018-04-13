@@ -13,6 +13,10 @@ import { CabeceraComponent } from './cabecera/cabecera.component';
 import { ProveedoresService } from './servicios/proveedores.service';
 import { CrearProvComponent } from './proveedores/crear-prov/crear-prov.component';
 import { EditarProvComponent } from './proveedores/editar-prov/editar-prov.component';
+import { ListadoFraComponent } from './facturas/listado-fra/listado-fra.component';
+import { CrearFraComponent } from './facturas/crear-fra/crear-fra.component';
+import { EditarFraComponent } from './facturas/editar-fra/editar-fra.component';
+import { FacturasService } from './servicios/facturas.service';
 
 const rutas:Routes = [
   {path:'' , component: InicioComponent},
@@ -20,6 +24,9 @@ const rutas:Routes = [
   {path: 'listado-proveedores', component: ListadoProvComponent},
   {path: 'crear-proveedor', component: CrearProvComponent},
   {path: 'editar-proveedor/:id', component: EditarProvComponent},
+  {path: 'listado-facturas', component: ListadoFraComponent},
+  {path: 'crear-factura', component: CrearFraComponent},
+  {path: 'editar-factura/:id', component: EditarFraComponent},
   {path: '**', component: InicioComponent}
 ]
 
@@ -32,7 +39,10 @@ const rutas:Routes = [
     ListadoProvComponent,
     CabeceraComponent,
     CrearProvComponent,
-    EditarProvComponent
+    EditarProvComponent,
+    ListadoFraComponent,
+    CrearFraComponent,
+    EditarFraComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +51,7 @@ const rutas:Routes = [
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [ProveedoresService],
+  providers: [ProveedoresService, FacturasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

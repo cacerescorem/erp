@@ -50,3 +50,76 @@
 .formulario {
     padding: 20px 20px 40px;
 }
+
+.formulario .row {
+    padding: 10px 0;
+}
+
+.radiobotones {
+    padding-top: 26px;
+}
+
+.icono-verde {
+    color: green;
+}
+
+.carmesi {
+    color: crimson;
+}
+
+.tabla-facturas th:nth-child(1), 
+.tabla-facturas td:nth-child(1){
+    width: 45%;
+}
+
+.tabla-facturas th:nth-child(2), 
+.tabla-facturas td:nth-child(2){
+    width: 20%
+}
+
+.tabla-facturas th:nth-child(3), 
+.tabla-facturas td:nth-child(3){
+    text-align: right;
+    width: 20%;
+}
+
+.tabla-facturas th:nth-child(4), 
+.tabla-facturas td:nth-child(4){
+    text-align: center;
+    width: 15%;
+}
+
+.barra-fija {
+    width: 100px;
+    height: calc(100vh - 56px);
+    background-color: rgb(70, 70, 70);
+    position: fixed;
+    top: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.barra-fija div {
+    color: rgb(194, 194, 194);
+    font-size: 50px;
+    transition: color 500ms ease-in-out;
+}
+
+.barra-fija div:hover {
+    color: rgb(233, 233, 233);
+    cursor: pointer;
+}
+
+.barra-fija div:first-child {
+    margin-top: 10px;
+}
+
+.col-md-12 {
+    width: calc(100% - 100px);
+    margin-left: 100px;
+}
+
+.breadcrumb {
+    margin-top: 80px;
+}
