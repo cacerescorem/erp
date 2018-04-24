@@ -4,11 +4,17 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
+import { AutenticacionService } from './autenticacion.service';
 
 @Injectable()
 export class ProveedoresService {
 
-  constructor(private http: HttpClient) { }
+  token:string;
+
+  constructor(private http: HttpClient,
+              private autenticacionService: AutenticacionService) { 
+                this.token = autenticacionService.token;
+              }
 
   getProveedores(){
     let url = 'http://localhost:3000/proveedor';
@@ -27,7 +33,7 @@ export class ProveedoresService {
   }
 
   postProveedor(proveedor){
-    let url = "http://localhost:3000/proveedor";
+    let url = 'http://localhost:3000/proveedor';
     return this.http.post(url, proveedor)
                   .map( (resp:any) => {
                     console.log(resp)
@@ -44,8 +50,8 @@ export class ProveedoresService {
   }
 
   deleteProveedor(id){
-    let url = 'http://localhost:3000/proveedor/';
-    return this.http.delete(url+id)
+    let url = 'http://localhost:3000/proveedor/'+ id + '?token=' + this.token;
+    return this.http.delete(url)
                     .map( (resp:any) => {
                       return resp;
                     });

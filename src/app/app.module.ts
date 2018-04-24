@@ -17,16 +17,40 @@ import { ListadoFraComponent } from './facturas/listado-fra/listado-fra.componen
 import { CrearFraComponent } from './facturas/crear-fra/crear-fra.component';
 import { EditarFraComponent } from './facturas/editar-fra/editar-fra.component';
 import { FacturasService } from './servicios/facturas.service';
+import { RegistroComponent } from './autenticacion/registro/registro.component';
+import { AutenticacionService } from './servicios/autenticacion.service';
+import { LoginComponent } from './autenticacion/login/login.component';
+import { VentasComponent } from './ventas/ventas.component';
+import { ListadoClientesComponent } from './clientes/listado-clientes/listado-clientes.component';
+import { CrearClientesComponent } from './clientes/crear-clientes/crear-clientes.component';
+import { EditarClientesComponent } from './clientes/editar-clientes/editar-clientes.component';
+import { ClientesService } from './servicios/clientes.service';
+import { PresupuestosService } from './servicios/presupuestos.service';
+import { ListadoPresComponent } from './presupuestos/listado-pres/listado-pres.component';
+import { CrearPresComponent } from './presupuestos/crear-pres/crear-pres.component';
+import { EditarPresComponent } from './presupuestos/editar-pres/editar-pres.component';
+import { AutenticacionGuard } from './servicios/autenticacion.guard';
+import { ListadoUsuariosComponent } from './autenticacion/listado-usuarios/listado-usuarios.component';
 
 const rutas:Routes = [
   {path:'' , component: InicioComponent},
-  {path:'compras', component: ComprasComponent},
-  {path: 'listado-proveedores', component: ListadoProvComponent},
-  {path: 'crear-proveedor', component: CrearProvComponent},
-  {path: 'editar-proveedor/:id', component: EditarProvComponent},
-  {path: 'listado-facturas', component: ListadoFraComponent},
-  {path: 'crear-factura', component: CrearFraComponent},
-  {path: 'editar-factura/:id', component: EditarFraComponent},
+  {path:'registro', component: RegistroComponent},
+  {path:'inicio-sesion', component: LoginComponent},
+  {path:'listado-usuarios', component: ListadoUsuariosComponent, canActivate: [AutenticacionGuard]},
+  {path:'compras', component: ComprasComponent, canActivate: [AutenticacionGuard]},
+  {path: 'listado-proveedores', component: ListadoProvComponent, canActivate: [AutenticacionGuard]},
+  {path: 'crear-proveedor', component: CrearProvComponent, canActivate: [AutenticacionGuard]},
+  {path: 'editar-proveedor/:id', component: EditarProvComponent, canActivate: [AutenticacionGuard]},
+  {path:'ventas', component: VentasComponent, canActivate: [AutenticacionGuard]},
+  {path: 'listado-clientes', component: ListadoClientesComponent, canActivate: [AutenticacionGuard]},
+  {path: 'crear-cliente', component: CrearClientesComponent, canActivate: [AutenticacionGuard]},
+  {path: 'editar-cliente/:id', component: EditarClientesComponent, canActivate: [AutenticacionGuard]},  
+  {path: 'listado-facturas', component: ListadoFraComponent, canActivate: [AutenticacionGuard]},
+  {path: 'crear-factura', component: CrearFraComponent, canActivate: [AutenticacionGuard]},
+  {path: 'editar-factura/:id', component: EditarFraComponent, canActivate: [AutenticacionGuard]},
+  {path: 'listado-presupuestos', component: ListadoPresComponent, canActivate: [AutenticacionGuard]},
+  {path: 'crear-presupuesto', component: CrearPresComponent, canActivate: [AutenticacionGuard]},
+  {path: 'editar-presupuesto/:id', component: EditarPresComponent, canActivate: [AutenticacionGuard]},
   {path: '**', component: InicioComponent}
 ]
 
@@ -42,7 +66,17 @@ const rutas:Routes = [
     EditarProvComponent,
     ListadoFraComponent,
     CrearFraComponent,
-    EditarFraComponent
+    EditarFraComponent,
+    RegistroComponent,
+    LoginComponent,
+    VentasComponent,
+    ListadoClientesComponent,
+    CrearClientesComponent,
+    EditarClientesComponent,
+    ListadoPresComponent,
+    CrearPresComponent,
+    EditarPresComponent,
+    ListadoUsuariosComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +85,12 @@ const rutas:Routes = [
     ReactiveFormsModule,
     BrowserAnimationsModule
   ],
-  providers: [ProveedoresService, FacturasService],
+  providers: [ProveedoresService, 
+              FacturasService, 
+              AutenticacionService, 
+              ClientesService,
+              PresupuestosService,
+              AutenticacionGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

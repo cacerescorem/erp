@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ProveedoresService } from '../../servicios/proveedores.service';
+import { ClientesService } from '../../servicios/clientes.service';
 import { trigger, state, style, animate, transition } from '@angular/animations';
-import { AutenticacionService } from '../../servicios/autenticacion.service';
 
 @Component({
-  selector: 'app-listado-prov',
-  templateUrl: './listado-prov.component.html',
-  styleUrls: ['./listado-prov.component.css'],
+  selector: 'app-listado-clientes',
+  templateUrl: './listado-clientes.component.html',
+  styleUrls: ['./listado-clientes.component.css'],
   animations: [
     trigger('alerta',[
       state('show', style({ opacity: 1})),
@@ -16,28 +15,27 @@ import { AutenticacionService } from '../../servicios/autenticacion.service';
     ])
   ]
 })
-export class ListadoProvComponent implements OnInit {
+export class ListadoClientesComponent implements OnInit {
 
   mensaje:string;
   mostrarAlerta:boolean = false;
-  proveedores:any;
+  clientes:any;
   id:string;
 
-  constructor(private proveedoresService: ProveedoresService,
-              private autenticacionService: AutenticacionService) { }
+  constructor(private clientesService: ClientesService) { }
 
   ngOnInit() {
-    this.cargarProveedores();
+    this.cargarClientes();
   }
 
   get estadoAlerta(){
     return this.mostrarAlerta ? 'show' : 'hide';
   }
 
-  cargarProveedores(){
-    this.proveedoresService.getProveedores()
+  cargarClientes(){
+    this.clientesService.getClientes()
                .subscribe((resp:any)=>{
-                  this.proveedores = resp.proveedores;
+                  this.clientes = resp.clientes;
                }, error => {
                  console.log(error);
                })
@@ -47,12 +45,12 @@ export class ListadoProvComponent implements OnInit {
     this.id = id;
   }
 
-  borrarProveedor(){
-    this.proveedoresService.deleteProveedor(this.id)
+  borrarCliente(){
+    this.clientesService.deleteCliente(this.id)
                 .subscribe((resp:any)=>{
-                  this.mensaje = "El proveedor ha sido eliminado correctamente";
+                  this.mensaje = "El cliente ha sido eliminado correctamente";
                   this.mostrarAlerta = true;
-                  this.cargarProveedores();
+                  this.cargarClientes();
                   setTimeout(()=>{
                       this.mostrarAlerta = false;
                   }, 2500);
