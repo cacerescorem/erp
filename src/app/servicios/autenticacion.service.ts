@@ -74,7 +74,6 @@ export class AutenticacionService {
       this.token = localStorage.getItem('token');
       this.nombre = localStorage.getItem('nombre');
       this.rol = localStorage.getItem('rol');
-      this.id = localStorage.getItem('id');
     } else {
       this.token = '';
       this.nombre = '';
