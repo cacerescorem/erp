@@ -12,9 +12,7 @@ export class ProveedoresService {
   token:string;
 
   constructor(private http: HttpClient,
-              private autenticacionService: AutenticacionService) { 
-                this.token = autenticacionService.token;
-              }
+              private autenticacionService: AutenticacionService) { }
 
   getProveedores(){
     let url = 'http://localhost:3000/proveedor';
@@ -50,6 +48,7 @@ export class ProveedoresService {
   }
 
   deleteProveedor(id){
+    this.token = this.autenticacionService.token;
     let url = 'http://localhost:3000/proveedor/'+ id + '?token=' + this.token;
     return this.http.delete(url)
                     .map( (resp:any) => {

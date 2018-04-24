@@ -18,7 +18,7 @@ import { AutenticacionService } from '../../servicios/autenticacion.service';
 })
 export class ListadoProvComponent implements OnInit {
 
-  mensaje:string;
+  mensaje:string = 'Error de conexión con el servidor';
   mostrarAlerta:boolean = false;
   proveedores:any;
   id:string;
@@ -57,13 +57,17 @@ export class ListadoProvComponent implements OnInit {
                       this.mostrarAlerta = false;
                   }, 2500);
                 },(error:any)=>{
-                  console.log(error);
-                  this.mensaje = 'Error de conexión con el servidor';
+                  if(error.error.mensaje === 'token incorrecto'){
+                    this.mensaje = "Su sesión ha caducado, reinicie sesión."
+                  }
                   this.mostrarAlerta = true;
                   setTimeout(()=>{
                     this.mostrarAlerta = false;
                   }, 2500);
                 })
+    setTimeout(()=>{
+      this.mensaje = 'Error de conexión con el servidor';
+    }, 3000)
   }
 
 }

@@ -56,7 +56,6 @@ export class AutenticacionService {
     return this.http.post(url, usuario)
                   .map( (resp:any) => {
                     this.guardarCredenciales(resp.token, resp.nombre, resp.rol);
-                    this.cargarCredenciales();
                     return resp;
                   });
   }
