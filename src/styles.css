@@ -263,6 +263,11 @@ form.fila:first-child(1) {
     visibility: hidden;
 }
 
+.btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 
 
 

@@ -96,6 +96,18 @@ export class ListadoProvComponent implements OnInit {
     }
   }
 
+  avanzarTramoBotones(){
+    this.tramoBotones += 5;
+    this.desde = this.tramoBotones * 5;
+    this.cargarProveedores();
+  }
+
+  retrocederTramoBotones(){
+    this.tramoBotones -= 5;
+    this.desde = this.tramoBotones * 5;
+    this.cargarProveedores();
+  }
+
 
   obtenerId(id){
     this.id = id;
