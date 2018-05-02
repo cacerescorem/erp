@@ -148,10 +148,11 @@
     height: 40px;
 }
 
-.cabecera .campo:nth-child(1) { width: 30%;}
-.cabecera .campo:nth-child(2) { width: 30%;}
+.cabecera .campo:nth-child(1) { width: 5%;}
+.cabecera .campo:nth-child(2) { width: 25%;}
 .cabecera .campo:nth-child(3) { width: 30%;}
-.cabecera .campo:nth-child(4) { width: 10%;}
+.cabecera .campo:nth-child(4) { width: 30%;}
+.cabecera .campo:nth-child(5) { width: 10%;}
 
 .cabecera .campo p {
     font-weight: bold;
@@ -169,11 +170,15 @@
     position: relative;
 }
 
-.fila .campo:nth-child(1) { width: 30%;}
-.fila .campo:nth-child(2) { width: 30%;}
+.fila .campo:nth-child(1) { 
+    width: 5%;
+    border-bottom: none;
+}
+.fila .campo:nth-child(2) { width: 15%;}
 .fila .campo:nth-child(3) { width: 30%;}
-.fila .campo:nth-child(4) { 
-    width: 10%;
+.fila .campo:nth-child(4) { width: 30%;}
+.fila .campo:nth-child(5) { 
+    width: 20%;
     border-bottom: none;
 }
 
@@ -242,6 +247,16 @@ form.fila:first-child(1) {
 
 .fila.editable select {
     width: 100%;
+}
+
+.paginacion {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.paginacion button {
+    margin: 10px;
 }
 
 

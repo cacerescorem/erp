@@ -84,4 +84,19 @@
       </td>
     </tr>
   </table>
+  <div class="paginacion">
+    <button class="btn btn-primary"
+            (click)="setDesde(-5);retrocederBotones();">
+      <i class="fas fa-arrow-circle-left"></i>
+    </button>
+    <button *ngFor="let boton of botones"
+            class="btn btn-primary"
+            (click)="updateDesde(boton*5-5)">
+      {{boton}}
+    </button>
+    <button class="btn btn-primary"
+            (click)="setDesde(5);avanzarBotones();">
+      <i class="fas fa-arrow-circle-right"></i>
+    </button>
+  </div>
 </div>

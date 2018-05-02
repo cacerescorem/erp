@@ -22,6 +22,10 @@ export class ListadoProvComponent implements OnInit {
   mostrarAlerta:boolean = false;
   proveedores:any;
   id:string;
+  desde:number = 0;
+  totales:number;
+  botones:number[] = [];
+  tramoBotones:number = 0;
 
   constructor(private proveedoresService: ProveedoresService,
               private autenticacionService: AutenticacionService) { }
@@ -35,13 +39,59 @@ export class ListadoProvComponent implements OnInit {
   }
 
   cargarProveedores(){
-    this.proveedoresService.getProveedores()
+    this.proveedoresService.getProveedores(this.desde)
                .subscribe((resp:any)=>{
                   this.proveedores = resp.proveedores;
+                  this.totales = resp.totales;
+                  this.botones = [];
+                  var i;
+                  for(i = this.tramoBotones; i< this.tramoBotones + 5; i++){
+                    this.botones.push(i+1);
+                  }
                }, error => {
                  console.log(error);
                })
   }
+
+  setDesde(valor){
+    var desde = this.desde + valor;
+    if (desde >= this.totales){
+      return;
+    } else if (desde < 0) {
+      return;
+    } else {
+      this.desde += valor;
+      this.cargarProveedores();
+    }
+  }
+
+  updateDesde(valor){
+    this.desde = valor;
+    this.cargarProveedores();
+  }
+
+  avanzarBotones(){
+    if (this.desde % 25 === 0){
+      this.botones = [];
+      this.tramoBotones += 5;
+      var i;
+      for(i = this.tramoBotones; i< this.tramoBotones + 5; i++){
+        this.botones.push(i+1);
+      }
+    }
+  }
+
+  retrocederBotones(){
+    if ((this.desde + 5) % 25 === 0){
+      this.botones = [];
+      this.tramoBotones -= 5;
+      var i;
+      for(i = this.tramoBotones; i< this.tramoBotones + 5; i++){
+        this.botones.push(i+1);
+      }
+    }
+  }
+
 
   obtenerId(id){
     this.id = id;

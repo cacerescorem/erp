@@ -31,12 +31,14 @@ import { CrearPresComponent } from './presupuestos/crear-pres/crear-pres.compone
 import { EditarPresComponent } from './presupuestos/editar-pres/editar-pres.component';
 import { AutenticacionGuard } from './servicios/autenticacion.guard';
 import { ListadoUsuariosComponent } from './autenticacion/listado-usuarios/listado-usuarios.component';
+import { ListadoSesionesComponent } from './autenticacion/listado-sesiones/listado-sesiones.component';
 
 const rutas:Routes = [
   {path:'' , component: InicioComponent},
   {path:'registro', component: RegistroComponent},
   {path:'inicio-sesion', component: LoginComponent},
   {path:'listado-usuarios', component: ListadoUsuariosComponent, canActivate: [AutenticacionGuard]},
+  {path:'listado-sesiones/:nombre', component: ListadoSesionesComponent, canActivate: [AutenticacionGuard]},
   {path:'compras', component: ComprasComponent, canActivate: [AutenticacionGuard]},
   {path: 'listado-proveedores', component: ListadoProvComponent, canActivate: [AutenticacionGuard]},
   {path: 'crear-proveedor', component: CrearProvComponent, canActivate: [AutenticacionGuard]},
@@ -76,7 +78,8 @@ const rutas:Routes = [
     ListadoPresComponent,
     CrearPresComponent,
     EditarPresComponent,
-    ListadoUsuariosComponent
+    ListadoUsuariosComponent,
+    ListadoSesionesComponent
   ],
   imports: [
     BrowserModule,
