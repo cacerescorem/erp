@@ -86,15 +86,20 @@
   </table>
   <div class="paginacion">
     <button class="btn btn-primary"
+            [ngClass]="{'oculto': desde === 0}"
             (click)="setDesde(-5);retrocederBotones();">
       <i class="fas fa-arrow-circle-left"></i>
     </button>
-    <button *ngFor="let boton of botones"
+    <div *ngFor="let boton of botones">
+      <button *ngIf="boton <= ( numeroBotones + 1 )"
             class="btn btn-primary"
+            [ngClass]="{'btn-outline-primary': boton - 1 === desde / 5}"
             (click)="updateDesde(boton*5-5)">
-      {{boton}}
-    </button>
+          {{boton}}
+      </button>
+    </div>
     <button class="btn btn-primary"
+            [ngClass]="{'oculto': desde >= (totales - 5)}"
             (click)="setDesde(5);avanzarBotones();">
       <i class="fas fa-arrow-circle-right"></i>
     </button>

@@ -25,6 +25,7 @@ export class ListadoProvComponent implements OnInit {
   desde:number = 0;
   totales:number;
   botones:number[] = [];
+  numeroBotones:number;
   tramoBotones:number = 0;
 
   constructor(private proveedoresService: ProveedoresService,
@@ -43,6 +44,7 @@ export class ListadoProvComponent implements OnInit {
                .subscribe((resp:any)=>{
                   this.proveedores = resp.proveedores;
                   this.totales = resp.totales;
+                  this.numeroBotones = this.totales / 5;
                   this.botones = [];
                   var i;
                   for(i = this.tramoBotones; i< this.tramoBotones + 5; i++){
@@ -55,14 +57,16 @@ export class ListadoProvComponent implements OnInit {
 
   setDesde(valor){
     var desde = this.desde + valor;
-    if (desde >= this.totales){
-      return;
-    } else if (desde < 0) {
-      return;
-    } else {
+    // if (desde >= this.totales){
+    //   return;
+    // } else if (desde < 0) {
+    //   return;
+    // } else {
       this.desde += valor;
       this.cargarProveedores();
-    }
+    //}
+    console.log(this.desde);
+    console.log(this.totales);
   }
 
   updateDesde(valor){

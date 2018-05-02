@@ -259,6 +259,10 @@ form.fila:first-child(1) {
     margin: 10px;
 }
 
+.oculto {
+    visibility: hidden;
+}
+
 
 
 
