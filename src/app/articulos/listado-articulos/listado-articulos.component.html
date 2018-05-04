@@ -1,6 +1,6 @@
 <div class="barra-fija">
   <div title="Clientes" 
-       routerLink="/listado-clientes">
+        routerLink="/listado-clientes">
       <i class="fas fa-address-book"></i>
   </div>
   <div title="Presupuestos" 
@@ -9,17 +9,22 @@
   </div>
   <div title="Articulos" 
       routerLink="/listado-articulos">
-      <i class="fas fa-archive"></i>
+    <i class="fas fa-archive"></i>
   </div>
 </div>
 <div class="col-md-12">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a routerLink="/inicio">Inicio</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Ventas</li>
+      <li class="breadcrumb-item"><a routerLink="/ventas">Ventas</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Artículos</li>
     </ol>
   </nav>
 </div>
 <div class="col-md-12 titulo">
-    <span>Dashboard</span>
+  <span>Artículos</span>
+  <button class="btn btn-primary"
+          routerLink="/crear-articulo">
+      <i class="fas fa-plus-circle"></i>
+  </button>
 </div>
