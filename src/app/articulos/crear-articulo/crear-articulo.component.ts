@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ArticulosService } from '../../servicios/articulos.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +14,9 @@ export class CrearArticuloComponent implements OnInit {
   articuloForm: FormGroup;
   articulo:any;
 
-  constructor(private fa: FormBuilder) { }
+  constructor(private fa: FormBuilder,
+              private articulosService: ArticulosService,
+              private router: Router) { }
 
   ngOnInit() {
     this.articuloForm = this.fa.group({
@@ -23,6 +27,12 @@ export class CrearArticuloComponent implements OnInit {
 
   crearArticulo(){
     this.articulo = this.guardarArticulo();
+    this.articulosService.postArticulo(this.articulo)
+              .subscribe((resp:any)=>{
+                this.router.navigate(['/listado-articulos']);
+              },(error)=>{
+                console.log(error);
+              })
   }
 
   guardarArticulo(){

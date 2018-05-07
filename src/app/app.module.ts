@@ -34,6 +34,7 @@ import { ListadoUsuariosComponent } from './autenticacion/listado-usuarios/lista
 import { ListadoSesionesComponent } from './autenticacion/listado-sesiones/listado-sesiones.component';
 import { CrearArticuloComponent } from './articulos/crear-articulo/crear-articulo.component';
 import { ListadoArticulosComponent } from './articulos/listado-articulos/listado-articulos.component';
+import { ArticulosService } from './servicios/articulos.service';
 
 const rutas:Routes = [
   {path:'' , component: InicioComponent},
@@ -99,7 +100,8 @@ const rutas:Routes = [
               AutenticacionService, 
               ClientesService,
               PresupuestosService,
-              AutenticacionGuard],
+              AutenticacionGuard,
+              ArticulosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

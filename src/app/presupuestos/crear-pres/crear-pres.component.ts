@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { PresupuestosService } from '../../servicios/presupuestos.service';
 import { ClientesService } from '../../servicios/clientes.service';
+import { ArticulosService } from '../../servicios/articulos.service';
 
 
 @Component({
@@ -14,13 +15,15 @@ export class CrearPresComponent implements OnInit {
   formPre: FormGroup;
   presupuesto:any;
   clientes:any;
+  articulos:any;
 
   constructor(private fp: FormBuilder,
               private presupuestosService: PresupuestosService,
-              private clientesService: ClientesService) { }
+              private clientesService: ClientesService,
+              private articulosService: ArticulosService) { }
 
   ngOnInit() {
-    this.cargarClientes();
+    this.cargarDatos();
     this.formPre = this.fp.group({
       cliente: null,
       fecha: null,
@@ -51,10 +54,16 @@ export class CrearPresComponent implements OnInit {
     control.removeAt(i);
   }
 
-  cargarClientes(){
+  cargarDatos(){
     this.clientesService.getTodosClientes()
                 .subscribe((resp:any)=>{
                   this.clientes = resp.clientes;
+                },(error)=>{
+                  console.log(error)
+                })
+    this.articulosService.getArticulo()
+                .subscribe((resp:any)=>{
+                  this.articulos = resp.articulos;
                 },(error)=>{
                   console.log(error)
                 })

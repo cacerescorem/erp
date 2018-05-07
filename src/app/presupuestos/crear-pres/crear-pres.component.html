@@ -59,7 +59,13 @@
               <div class="form-group col-md-4">
                 <label for="articulo">Artículo</label>
                 <input type="text" class="form-control"
-                       formControlName="articulo">
+                       formControlName="articulo" list="articulos">
+                <datalist id="articulos">
+                  <option *ngFor="let articulo of articulos"
+                        [value]="articulo.referencia">
+                    {{articulo.referencia}}
+                  </option>
+                </datalist>
               </div>
               <div class="form-group col-md-2">
                 <label for="cantidad">Cantidad</label>
