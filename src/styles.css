@@ -331,6 +331,10 @@ form.fila:first-child(1) {
     }
   }
 
+  input[readonly] {
+      text-align: right;
+  }
+
 
 
 
