@@ -28,6 +28,7 @@ export class CrearPresComponent implements OnInit {
     this.cargarDatos();
     this.formPre = this.fp.group({
       cliente: null,
+      cif: null,
       fecha: null,
       items: this.fp.array([
         this.initItem()
@@ -90,6 +91,15 @@ export class CrearPresComponent implements OnInit {
   detectarCambios(){
       this.formPre.valueChanges
               .subscribe(valor =>{
+                var nombreCliente = valor.cliente;
+                var clienteCargado = this.clientes.find(cliente=>{
+                  return cliente.nombre === nombreCliente;
+                });
+                if(clienteCargado){
+                  this.formPre.value.cif = clienteCargado.cif;
+                } else {
+                  this.formPre.value.cif = '';
+                }
                 var importe = 0;
                 var suma = 0;
                 var i;
@@ -100,6 +110,8 @@ export class CrearPresComponent implements OnInit {
                   });
                   if(articuloCargado){
                     this.formPre.value.items[i].precio = articuloCargado.precio;     
+                  } else {
+                    this.formPre.value.items[i].precio = 0;
                   }
                   this.formPre.value.items[i].importe = this.redondear(valor.items[i].cantidad * this.formPre.value.items[i].precio) ;
                   suma += valor.items[i].importe; 
@@ -123,6 +135,7 @@ export class CrearPresComponent implements OnInit {
   guardarPresupuesto(){
     const guardarPresupuesto = {
       cliente: this.formPre.get('cliente').value,
+      cif: this.formPre.get('cif').value,
       fecha: this.formPre.get('fecha').value,
       items: this.formPre.get('items').value,
       suma: this.formPre.get('suma').value,
