@@ -15,7 +15,7 @@ export class EditarPresComponent implements OnInit {
   formPre: FormGroup;
   presupuesto:any;
   clientes:any;
-  articulos:any;
+  articulos:any = []
   id:string;
 
   constructor(private fp: FormBuilder,
@@ -24,9 +24,9 @@ export class EditarPresComponent implements OnInit {
               private articulosService: ArticulosService,
               private router: Router,
               private route: ActivatedRoute) {
-                if(!this.articulos){
-                  this.articulos = [];
-                }
+                setTimeout(()=>{
+                  this.detectarCambios();
+                },1000)
                }
 
   ngOnInit() {
@@ -43,13 +43,13 @@ export class EditarPresComponent implements OnInit {
       tipo: 0.21,
       iva: null,
       total: null,
-      numero: null
+      num: null
     })
   }
 
-  ngAfterViewChecked(){
-    this.detectarCambios();
-  }
+  // ngAfterViewChecked(){
+  //   this.detectarCambios();
+  // }
 
   cargarDatos(){
     this.clientesService.getTodosClientes()
@@ -78,6 +78,7 @@ export class EditarPresComponent implements OnInit {
   }
 
   patchForm(){
+    var numero = '000' + this.presupuesto.numero + '/18';
     this.formPre.patchValue({
       cliente: this.presupuesto.cliente,
       cif: this.presupuesto.cif,
@@ -86,7 +87,7 @@ export class EditarPresComponent implements OnInit {
       tipo: this.presupuesto.tipo,
       iva: this.presupuesto.iva,
       total: this.presupuesto.total,
-      numero: this.presupuesto.numero
+      num: numero.slice(-7)
     })
     this.setPresupuestoItems();
   }
@@ -137,15 +138,6 @@ export class EditarPresComponent implements OnInit {
   detectarCambios(){
       this.formPre.valueChanges
               .subscribe(valor =>{
-                // var nombreCliente = valor.cliente;
-                // var clienteCargado = this.clientes.find(cliente=>{
-                //   return cliente.nombre === nombreCliente;
-                // });
-                // if(clienteCargado){
-                //   this.formPre.value.cif = clienteCargado.cif;
-                // } else {
-                //   this.formPre.value.cif = '';
-                // }
                 var importe = 0;
                 var suma = 0;
                 var i;
@@ -157,7 +149,10 @@ export class EditarPresComponent implements OnInit {
                   if(articuloCargado){
                     this.formPre.value.items[i].precio = articuloCargado.precio;     
                     this.formPre.value.items[i].importe = this.redondear(valor.items[i].cantidad * this.formPre.value.items[i].precio);
-                  } 
+                  } else {
+                    this.formPre.value.items[i].precio = 0;
+                    this.formPre.value.items[i].importe = this.redondear(valor.items[i].cantidad * this.formPre.value.items[i].precio);
+                  }
                   suma += valor.items[i].importe; 
                 }
                 this.formPre.value.suma = suma;
